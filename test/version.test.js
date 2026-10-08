@@ -18,4 +18,10 @@ describe('GET /version', () => {
     const res = await request(app).get('/version')
     expect(res.headers['content-type']).toMatch(/application\/json/)
   })
+
+  // DEVOPS-5: returns the application version read from package.json
+  it('returns only the version key', async () => {
+    const res = await request(app).get('/version')
+    expect(Object.keys(res.body)).toEqual(['version'])
+  })
 })
