@@ -1,3 +1,4 @@
+// DEVOPS-5: returns the application version read from package.json
 /**
  * GET /version → { version: "<package.json version>" }
  * Reads version from package.json to keep it source-of-truth.
