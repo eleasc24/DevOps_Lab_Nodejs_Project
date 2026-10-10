@@ -1,3 +1,4 @@
+// DevOps-6: returns { name, version, node, uptime }
 /**
  * GET /info → merges two small helpers for easy unit testing.
  * Returns: { name, version, node, uptime }

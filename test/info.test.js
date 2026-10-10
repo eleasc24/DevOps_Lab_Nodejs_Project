@@ -22,3 +22,15 @@ describe('GET /info', () => {
     expect(res.body.uptime).toBeGreaterThanOrEqual(0)
   })
 })
+
+// DEVOPS-6: returns all required application info fields
+it('returns only the expected keys', async () => {
+  const res = await request(app).get('/info')
+
+  expect(Object.keys(res.body)).toEqual([
+    'name',
+    'version',
+    'node',
+    'uptime'
+  ])
+})
