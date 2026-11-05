@@ -95,4 +95,7 @@ test/
 - `npm test -- --coverage` – with coverage
 - `npm run lint` – ESLint check
 
+## Hospital Management API
+
+REST API for managing doctors, patients, appointments and system metrics.
 Enjoy the lab!
