@@ -10,12 +10,20 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { errorHandler } from './utils/errorHandler.js'
-
+import doctorsRouter from './routes/doctors.route.js'
+import patientsRouter from './routes/patients.route.js'
+import appointmentsRouter from './routes/appointments.route.js'
+import metricsRouter from './routes/metrics.route.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
+app.use(express.json())
 
+app.use('/api/doctors', doctorsRouter)
+app.use('/api/patients', patientsRouter)
+app.use('/api/appointments', appointmentsRouter)
+app.use('/api/metrics', metricsRouter)
 // Simple root + health endpoints
 app.get('/', (_req, res) => res.json({ ok: true, message: 'Hello from CI/CD demo 👋' }))
 app.get('/health', (_req, res) => res.status(200).send('OK'))
