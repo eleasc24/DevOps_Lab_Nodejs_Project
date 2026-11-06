@@ -19,7 +19,7 @@ describe('Patients API', () => {
   it('POST /api/patients should refuse a missing field', async () => {
     const res = await request(app).post('/api/patients').send({ name: 'Marie' })
     expect(res.status).toBe(400)
-    expect(res.body.error).toBe('Missing required fields')
+    expect(res.body.error).toBe('Valid name and age are required')
   })
 
   it('POST /api/patients should refuse an invalid age', async () => {
@@ -40,5 +40,31 @@ describe('Patients API', () => {
 
     const missing = await request(app).get('/api/patients/999')
     expect(missing.status).toBe(404)
+  })
+  it('POST /api/patients should reject a name containing only spaces', async () => {
+    const res = await request(app)
+      .post('/api/patients')
+      .send({ name: '   ', age: 29 })
+
+    expect(res.status).toBe(400)
+    expect(res.body.error).toBe('Valid name and age are required')
+  })
+
+  it('POST /api/patients should reject a non-string name', async () => {
+    const res = await request(app)
+      .post('/api/patients')
+      .send({ name: 123, age: 29 })
+
+    expect(res.status).toBe(400)
+    expect(res.body.error).toBe('Valid name and age are required')
+  })
+
+  it('POST /api/patients should trim spaces from a valid name', async () => {
+    const res = await request(app)
+      .post('/api/patients')
+      .send({ name: '  Marie  ', age: 29 })
+
+    expect(res.status).toBe(201)
+    expect(res.body.name).toBe('Marie')
   })
 })
