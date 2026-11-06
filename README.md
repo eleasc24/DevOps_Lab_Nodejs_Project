@@ -32,11 +32,11 @@ Open `coverage/index.html` for a visual coverage report (locally).
 - `GET /info` – returns `{ name, version, node, uptime }`
 - `GET /boom` – triggers an error to test the global error handler
 
-Routes are **auto-mounted** from `src/routes/auto/*.route.js` so each student can add a file without touching `src/app.js` (fewer merge conflicts).
+Routes are **auto-mounted** from `src/routes/auto/*.route.js` so each student can add a file without touching `src/app.js` (fewer merge conflicts)
 
 ---
 
-## Tests
+## TestsS
 
 - **Integration tests** (Supertest) target HTTP endpoints in `test/*.test.js`.
 - **Unit tests** target internal logic in `test/unit/*.test.js`.
