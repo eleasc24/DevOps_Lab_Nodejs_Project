@@ -36,7 +36,7 @@ Routes are **auto-mounted** from `src/routes/auto/*.route.js` so each student ca
 
 ---
 
-## Testss
+## TestsS
 
 - **Integration tests** (Supertest) target HTTP endpoints in `test/*.test.js`.
 - **Unit tests** target internal logic in `test/unit/*.test.js`.
