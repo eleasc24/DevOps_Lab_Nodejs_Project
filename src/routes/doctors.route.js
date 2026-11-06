@@ -3,7 +3,7 @@ import { doctors, nextId } from '../data/store.js'
 
 const router = express.Router()
 
-// GET all doctors
+// GET all doctors and return them as JSON
 router.get('/', (req, res) => res.status(200).json(doctors))
 
 // GET one doctor by id
@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
   res.status(200).json(doctor)
 })
 
-// POST a new doctor
+// POST a new doctor after validating the required fields
 router.post('/', (req, res) => {
   const { name, specialty } = req.body ?? {}
   if (!name || !specialty) {

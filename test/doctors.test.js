@@ -3,13 +3,13 @@ import request from 'supertest'
 import app from '../src/app.js'
 
 describe('Doctors API', () => {
-  it('GET /api/doctors should return an array', async () => {
+  it('GET /api/doctors should return a list of all doctors with status 200', async () => {
     const res = await request(app).get('/api/doctors')
     expect(res.status).toBe(200)
     expect(Array.isArray(res.body)).toBe(true)
   })
 
-  it('POST /api/doctors should add a new doctor', async () => {
+  it('POST /api/doctors should create a new doctor with status 201', async () => {
     const res = await request(app)
       .post('/api/doctors')
       .send({ name: 'Dr. Lee', specialty: 'Neurology' })
@@ -18,7 +18,7 @@ describe('Doctors API', () => {
     expect(res.body.name).toBe('Dr. Lee')
   })
 
-  it('POST /api/doctors should refuse a missing field', async () => {
+  it('POST /api/doctors should return 400 when a required field is missing', async () => {
     const res = await request(app).post('/api/doctors').send({ name: 'Dr. Nobody' })
     expect(res.status).toBe(400)
     expect(res.body.error).toBe('Missing required fields')
