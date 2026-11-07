@@ -1,10 +1,10 @@
 import express from 'express'
-import { appointments, doctors, patients } from '../data/store.js'
+import { appointments, doctors, patients } from '../../data/store.js'
 
 const router = express.Router()
 
 // GET system and hospital statistics
-router.get('/', (req, res) => {
+router.get('/api/metrics', (req, res) => {
   res.status(200).json({
     system: {
       node: process.version,
