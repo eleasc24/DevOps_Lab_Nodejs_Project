@@ -1,13 +1,13 @@
 import express from 'express'
-import { patients, nextId } from '../data/store.js'
+import { patients, nextId } from '../../data/store.js'
 
 const router = express.Router()
 
 // GET all patients
-router.get('/', (req, res) => res.status(200).json(patients))
+router.get('/api/patients', (req, res) => res.status(200).json(patients))
 
 // GET one patient by id
-router.get('/:id', (req, res) => {
+router.get('/api/patients/:id', (req, res) => {
   const patient = patients.find((p) => p.id === Number(req.params.id))
   if (!patient) {
     return res.status(404).json({ error: 'Patient not found' })
@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
 })
 
 // POST a new patient
-router.post('/', (req, res) => {
+router.post('/api/patients', (req, res) => {
   const { name, age } = req.body ?? {}
 
   if (typeof name !== 'string' || !name.trim() || age === undefined) {

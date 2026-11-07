@@ -54,4 +54,29 @@ describe('Appointments API', () => {
     const res = await request(app).post('/api/appointments')
     expect(res.status).toBe(400)
   })
+
+  it('GET /api/appointments/:id should return one appointment', async () => {
+    const created = await request(app)
+      .post('/api/appointments')
+      .send({ doctorId: 2, patientId: 2, date: '2026-11-25' })
+    const res = await request(app).get(`/api/appointments/${created.body.id}`)
+    expect(res.status).toBe(200)
+    expect(res.body).toEqual(created.body)
+  })
+
+  it('GET /api/appointments/:id should answer 404 for an unknown id', async () => {
+    const res = await request(app).get('/api/appointments/999')
+    expect(res.status).toBe(404)
+    expect(res.body.error).toBe('Appointment not found')
+  })
+
+  it('GET /api/appointments?doctorId= should filter by doctor', async () => {
+    await request(app)
+      .post('/api/appointments')
+      .send({ doctorId: 2, patientId: 1, date: '2026-11-26' })
+    const res = await request(app).get('/api/appointments?doctorId=2')
+    expect(res.status).toBe(200)
+    expect(res.body.length).toBeGreaterThan(0)
+    expect(res.body.every((a) => a.doctorId === 2)).toBe(true)
+  })
 })

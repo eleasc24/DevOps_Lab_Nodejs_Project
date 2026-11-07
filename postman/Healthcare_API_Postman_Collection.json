@@ -1,0 +1,332 @@
+{
+  "info": {
+    "name": "Healthcare API Tests",
+    "description": "Postman tests for the Healthcare API (Lab 5). Start the API with npm run dev first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /api/doctors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/doctors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "doctors"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "  pm.response.to.have.status(200)",
+              "})",
+              "pm.test(\"Response is an array\", function () {",
+              "  pm.expect(pm.response.json()).to.be.an(\"array\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/doctors",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doctors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "doctors"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Julie\",\n  \"specialty\": \"Neurology\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "  pm.response.to.have.status(201)",
+              "})",
+              "pm.test(\"Response has an id\", function () {",
+              "  pm.expect(pm.response.json()).to.have.property(\"id\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/doctors (missing field)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/doctors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "doctors"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Nobody\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {",
+              "  pm.response.to.have.status(400)",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /api/patients",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/patients",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "patients"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "  pm.response.to.have.status(200)",
+              "})",
+              "pm.test(\"Response is an array\", function () {",
+              "  pm.expect(pm.response.json()).to.be.an(\"array\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/patients",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/patients",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "patients"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Marie\",\n  \"age\": 29\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "  pm.response.to.have.status(201)",
+              "})",
+              "pm.test(\"Response has an id\", function () {",
+              "  pm.expect(pm.response.json()).to.have.property(\"id\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /api/appointments",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/appointments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "appointments"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "  pm.response.to.have.status(200)",
+              "})",
+              "pm.test(\"Response is an array\", function () {",
+              "  pm.expect(pm.response.json()).to.be.an(\"array\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/appointments",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/appointments",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "appointments"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"doctorId\": 1,\n  \"patientId\": 1,\n  \"date\": \"2026-11-20\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "  pm.response.to.have.status(201)",
+              "})",
+              "pm.test(\"Response has an id\", function () {",
+              "  pm.expect(pm.response.json()).to.have.property(\"id\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "GET /api/metrics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/metrics",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "metrics"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "  pm.response.to.have.status(200)",
+              "})",
+              "pm.test(\"Has hospital statistics\", function () {",
+              "  pm.expect(pm.response.json()).to.have.property(\"hospital\")",
+              "})"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
